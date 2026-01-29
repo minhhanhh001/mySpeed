@@ -30,6 +30,6 @@ players.LocalPlayer.CharacterAdded:Connect(function(char)
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
 
-while getgenv().Enabled and task.wait() do
+while getgenv().Enabled and .wait() do
     players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end
