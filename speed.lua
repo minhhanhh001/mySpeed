@@ -24,7 +24,6 @@ players.LocalPlayer.CharacterAdded:Connect(function(char)
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
 
--- giữ logic gốc, chỉ đổi giá trị
 while getgenv().Enabled and task.wait() do
     local char = players.LocalPlayer.Character
     local hum = char and char:FindFirstChild("Humanoid")
