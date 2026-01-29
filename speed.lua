@@ -24,19 +24,15 @@ players.LocalPlayer.CharacterAdded:Connect(function(char)
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
 
+-- giữ logic gốc, chỉ đổi giá trị
 while getgenv().Enabled and task.wait() do
     local char = players.LocalPlayer.Character
     local hum = char and char:FindFirstChild("Humanoid")
     if hum then
-        local target
         if hum.MoveDirection.Magnitude > 0 then
-            target = getgenv().RunSpeed
+            hum.WalkSpeed = getgenv().RunSpeed or getgenv().Speed
         else
-            target = getgenv().Speed
-        end
-
-        if hum.WalkSpeed ~= target then
-            hum.WalkSpeed = target
+            hum.WalkSpeed = getgenv().Speed
         end
     end
 end
