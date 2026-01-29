@@ -5,8 +5,10 @@ local function bypassWalkSpeed()
         if not getgenv().Enabled then return end
     else
         getgenv().executed = true
+
         local mt = getrawmetatable(game)
         setreadonly(mt, false)
+
         local oldindex = mt.__index
         mt.__index = newcclosure(function(self, b)
             if b == "WalkSpeed" then
@@ -24,15 +26,14 @@ players.LocalPlayer.CharacterAdded:Connect(function(char)
     char:WaitForChild("Humanoid").WalkSpeed = getgenv().Speed
 end)
 
-while getgenv().Enabled and task.wait() do
-    local char = players.LocalPlayer.Character
-    local hum = char and char:FindFirstChild("Humanoid")
-    if hum then
-        if hum.MoveDirection.Magnitude > 0 then
-            hum.WalkSpeed = getgenv().RunSpeed or getgenv().Speed
-        else
-            hum.WalkSpeed = getgenv().Speed
-        end
+local lastSpeed = nil
+
+while getgenv().Enabled and wait() do
+    local hum = players.LocalPlayer.Character:WaitForChild("Humanoid")
+    if lastSpeed ~= getgenv().Speed then
+        hum.WalkSpeed = getgenv().Speed
+        lastSpeed = getgenv().Speed
     end
 end
+
 
