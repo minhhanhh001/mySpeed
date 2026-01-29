@@ -25,12 +25,19 @@ players.LocalPlayer.CharacterAdded:Connect(function(char)
 end)
 
 while getgenv().Enabled and task.wait() do
-    local hum = players.LocalPlayer.Character and players.LocalPlayer.Character:FindFirstChild("Humanoid")
+    local char = players.LocalPlayer.Character
+    local hum = char and char:FindFirstChild("Humanoid")
     if hum then
+        local target
         if hum.MoveDirection.Magnitude > 0 then
-            hum.WalkSpeed = getgenv().RunSpeed
+            target = getgenv().RunSpeed
         else
-            hum.WalkSpeed = getgenv().Speed
+            target = getgenv().Speed
+        end
+
+        if hum.WalkSpeed ~= target then
+            hum.WalkSpeed = target
         end
     end
 end
+
